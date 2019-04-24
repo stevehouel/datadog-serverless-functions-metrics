@@ -1,0 +1,14 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Pushes custom metrics from Lambda Report to Datadog.
+Resources:
+  ddlambdametricfunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Description: Pushes custom metrics from Lambda Report to Datadog.
+      Handler: lambda_function_lite.lambda_handler
+      MemorySize: 128
+      Runtime: python3.6
+      Timeout: 120
+      Layers:
+        - Fn:Sub: "arn:aws:lambda:${AWS::Region}:464622532012:layer:Datadog-Python36-metric:2"
