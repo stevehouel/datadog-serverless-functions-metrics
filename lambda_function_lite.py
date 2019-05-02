@@ -10,8 +10,6 @@ import boto3
 # Imported through Lambda Layer
 from datadog import datadog_lambda_wrapper, lambda_metric
 
-DD_CUSTOM_TAGS = "ddtags"
-
 # Pass custom tags as environment variable, ensure comma separated, no trailing comma in envvar!
 DD_TAGS = os.environ.get("DD_TAGS", "")
 

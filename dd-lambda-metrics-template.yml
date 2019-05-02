@@ -1,6 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: Pushes custom metrics from Lambda Report to Datadog.
+Parameters:
+  DataDogApiKey:
+    Type: String
+    Description: Your Datadog API Key
+  DataDogAppKey:
+    Type: String
+    Description: Your Datadog APP Key
 Resources:
   ddlambdametricfunction:
     Type: 'AWS::Serverless::Function'
@@ -12,4 +19,8 @@ Resources:
       Runtime: python3.6
       Timeout: 120
       Layers:
-        - Fn:Sub: "arn:aws:lambda:${AWS::Region}:464622532012:layer:Datadog-Python36-metric:2"
+        - Fn::Sub: "arn:aws:lambda:${AWS::Region}:464622532012:layer:Datadog-Python36-metric:2"
+      Environment:
+        Variables:
+          DATADOG_API_KEY: !Ref DataDogApiKey
+          DATADOG_APP_KEY: !Ref DataDogAppKey
